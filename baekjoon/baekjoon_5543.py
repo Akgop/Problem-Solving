@@ -11,6 +11,5 @@ for j in range(2):
     if temp < drink:
         drink = temp
 
-result = burger + drink
-result = result - 50
+result = burger + drink - 50
 print(result)
