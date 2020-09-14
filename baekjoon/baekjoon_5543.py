@@ -1,4 +1,4 @@
-burger = 2000
+burger = 2000   # 실습1
 drink = 2000
 
 for i in range(3):
