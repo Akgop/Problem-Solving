@@ -1,4 +1,4 @@
-burger = 2000
+burger = 2000   #baekjoon 5543
 drink = 2000
 
 for i in range(3):
