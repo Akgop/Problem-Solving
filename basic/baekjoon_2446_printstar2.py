@@ -1,4 +1,4 @@
-# My Code  
+# My Code
 n = int(input())
 for i in range(n):
     print(' '*i, end='')
