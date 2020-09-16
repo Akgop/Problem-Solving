@@ -12,7 +12,7 @@ num = int(input())
 for n in range(-num+1, num):
     print(' '*(num-abs(n)-1) + '*'*(2*abs(n)+1))
 
-# Others code 2, print + syntax
+# Others code 2, print(+) syntax
 n=int(input())
 for i in range(n):
     print(" "*i + "*"*(2*n-2*i-1))
