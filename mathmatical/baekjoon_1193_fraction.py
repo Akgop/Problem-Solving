@@ -12,4 +12,4 @@ b = n - (x-sum_n)
 if n % 2 == 0:
     print('%d/%d' % (b, a))
 else:
-    print('%d/%d' % (a, b))
+    print(a, "/", b, sep="")
