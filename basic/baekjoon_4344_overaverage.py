@@ -9,5 +9,4 @@ for _ in range(C):
     answer = round((cnt/score[0]), 5)
     print("%.3f%%" % (answer*100))
 
-
-
+# % 자체를 출력하고 싶다면 %%로 출력
