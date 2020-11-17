@@ -1,7 +1,7 @@
 str1 = input()
 str2 = input()
 
-table = [[0 for _ in range(len(str2)+1)] for _ in range(len(str1)+1)]
+table = [[0]*(len(str2)+1) for _ in range(len(str1)+1)]
 
 for i in range(1, len(str1)+1):
     for j in range(1, len(str2)+1):
