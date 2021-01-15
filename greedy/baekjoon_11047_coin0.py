@@ -1,18 +1,11 @@
-import sys
+N, K = map(int, input().split())
+# list comprehension 을 이용하여 입력 여러개 받기
+A = [int(input()) for _ in range(N)]
 
-N, K = map(int, sys.stdin.readline().split())
-A = []
-count = 0
 answer = 0
-for _ in range(N):
-    A.append(int(sys.stdin.readline()))
-while True:
-    if answer == K:
-        break
-    temp = (K - answer)//A[-1]  # 시간 단축을 위해 count
-    if temp > 0:
-        answer += A[-1]*temp    # 시간 단축을 위해
-        count += temp
-        continue
-    A.pop()
-print(count)
+i = -1          # 음수 인덱싱은 뒤에서부터 탐색
+while K > 0:
+    answer += K // A[i]
+    K %= A[i]
+    i -= 1
+print(answer)
