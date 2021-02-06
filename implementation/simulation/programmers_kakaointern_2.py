@@ -25,11 +25,11 @@ def solution(gems):
             gem_dict[gems[i]] -= 1
             low += 1
             if gem_dict[gems[i]] == 0:
-                answer.append([low, high])
+                if (high - low) < answer[2]:
+                    answer = [low, high, high - low]
                 gem_dict.pop(gems[i])
                 break
-    answer.sort(key=lambda x: (x[1]-x[0], x[0]))
-    return answer[0]
+    return answer[0:2]
 
 
 print(solution(["DIA", "RUBY", "RUBY", "DIA", "DIA", "EMERALD", "SAPPHIRE", "DIA"]))
