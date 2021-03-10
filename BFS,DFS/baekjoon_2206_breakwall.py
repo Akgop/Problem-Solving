@@ -41,11 +41,7 @@ def solution(n, m):
 if __name__ == "__main__":
     N, M = map(int, sys.stdin.readline().rstrip().split())
     graph = list()
-    walls = list()
-    for idx in range(N):
+    for _ in range(N):
         data = list(map(int, sys.stdin.readline().rstrip()))
-        for idx2 in range(len(data)):
-            if data[idx2] == 1:
-                walls.append((idx, idx2))
         graph.append(data)
     solution(N, M)
