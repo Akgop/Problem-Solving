@@ -7,46 +7,45 @@ dn = [-1, 1, 0, 0]  # 상, 하, 좌, 우
 dm = [0, 0, -1, 1]
 
 
-def bfs(tmp_graph, start, n, m):
-    queue = deque()
-    queue.append(start)
-    tmp_graph[0][0] = 1
-    visited = [[False]*m for _ in range(n)]
-    visited[0][0] = True
-    while queue:
-        now = queue.popleft()
-        depth = now[2]
+def bfs(start, n, m):
+    q = deque()
+    q.append(start)
+    visited = [[[0]*2 for _ in range(m)] for _ in range(n)]
+    visited[0][0][0] = 1
+    while q:
+        now_x, now_y, wall = q.popleft()
+        if now_x == n-1 and now_y == m-1:
+            return visited[now_x][now_y][wall]
         for i in range(4):
-            nn = now[0] + dn[i]
-            nm = now[1] + dm[i]
-            # 인덱스 벗어난 경우
+            nn = now_x + dn[i]
+            nm = now_y + dm[i]
+            # 인덱스 벗어남
             if nn < 0 or nm < 0 or nn >= n or nm >= m:
                 continue
-            # 이미 방문했던 노드 or 벽
-            if visited[nn][nm] is True or tmp_graph == 1:
-                continue
-            # queue 에 넣고 방문 처리
-            queue.append((nn, nm, depth + 1))
-            tmp_graph[nn][nm] = depth + 1
+            # 벽을 만나면 뚫고 차원이동, wall 이 0이라는 것은 아직 뚫지 않았다는 점
+            if graph[nn][nm] == 1 and wall == 0:
+                visited[nn][nm][1] = visited[now_x][now_y][0] + 1
+                q.append((nn, nm, 1))
+            # 그냥 일반 길을 만났을 때.
+            if graph[nn][nm] == 0 and visited[nn][nm][wall] == 0:
+                visited[nn][nm][wall] = visited[now_x][now_y][wall] + 1
+                q.append((nn, nm, wall))
+    return -1
 
 
 def solution(n, m):
-    tmp_graph = copy.deepcopy(graph)
-    bfs(tmp_graph, (0, 0, 1), n, m)
-
-    # 벽만 모아놓은 리스트 생성: O(NM): 100만
-    walls = list()
-    for i in range(n):
-        for j in range(m):
-            if graph[i][j] == 1:
-                walls.append((i, j))
-
-
+    answer = bfs((0, 0, 0), n, m)
+    print(answer)
 
 
 if __name__ == "__main__":
     N, M = map(int, sys.stdin.readline().rstrip().split())
     graph = list()
-    for _ in range(N):
-        graph.append(list(map(int, sys.stdin.readline().rstrip())))
+    walls = list()
+    for idx in range(N):
+        data = list(map(int, sys.stdin.readline().rstrip()))
+        for idx2 in range(len(data)):
+            if data[idx2] == 1:
+                walls.append((idx, idx2))
+        graph.append(data)
     solution(N, M)
