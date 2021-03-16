@@ -44,7 +44,6 @@ def solution(n):
         print(0)
     else:
         result = get_prime_number(n)
-        # print(result[2], result[5])
         print(min(result[2], result[5]))
 
 
