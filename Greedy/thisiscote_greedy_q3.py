@@ -12,10 +12,7 @@ def solution(n):
             if li[i] == '0':
                 count_down += 1
             prev = li[i]
-    if li[0] == li[n-1]:
-        print(min(count_up, count_down))
-    else:
-        print(max(count_up, count_down))
+    print(max(count_up, count_down))
 
 
 if __name__ == "__main__":
