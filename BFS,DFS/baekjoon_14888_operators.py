@@ -1,24 +1,9 @@
 import sys
 
 
-def operate(num1, num2, cmd):
-    if cmd == 0:
-        num1 += num2
-    if cmd == 1:
-        num1 -= num2
-    if cmd == 2:
-        num1 *= num2
-    if cmd == 3:
-        if num1 * num2 < 0:
-            num1 = -(abs(num1) // abs(num2))
-        else:
-            num1 //= num2
-    return num1
-
-
 def dfs(n, now, idx):
     global add, sub, mul, div, min_value, max_value
-    # 연산 수행
+    # 최종 깊이까지 내려갔으면, 연산 수행
     if n == idx:
         min_value = min(min_value, now)
         max_value = max(max_value, now)
