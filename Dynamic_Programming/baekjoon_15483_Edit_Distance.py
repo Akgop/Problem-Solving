@@ -15,8 +15,7 @@ def solution(str_a, str_b):
     return max(len(str_a), len(str_b)) - table[len(str_a)][len(str_b)]
 
 
-print(solution("cat", "cut"))
-print(solution("sunday", "saturday"))
-print(solution("aaawzawzaaaacc", "axxdddddddddc"))
-print(solution("aaawdawdaaaacc", "axxddddddddddc"))
-print(solution("banana", "baanana"))
+if __name__ == "__main__":
+    str1 = sys.stdin.readline().rstrip()
+    str2 = sys.stdin.readline().rstrip()
+    print(solution(str1, str2))
