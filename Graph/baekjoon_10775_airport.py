@@ -1,3 +1,6 @@
+import sys
+
+
 def find(x, parent):
     if x != parent[x]:
         parent[x] = find(parent[x], parent)
@@ -15,7 +18,7 @@ def union(a, b, parent):
 
 def solution(g, p, dock):
     entries = [0] * (g + 1)
-    for i in range(g + 1):
+    for i in range(1, g + 1):
         entries[i] = i
 
     answer = 0
@@ -29,10 +32,10 @@ def solution(g, p, dock):
     return answer
 
 
-print(solution(
-    4, 5, [3, 3, 3, 3, 3]
-))
-
-print(solution(
-    4, 6, [2, 2, 3, 3, 4, 4]
-))
+if __name__ == "__main__":
+    G = int(sys.stdin.readline().rstrip())
+    P = int(sys.stdin.readline().rstrip())
+    Dock = []
+    for _ in range(P):
+        Dock.append(int(sys.stdin.readline().rstrip()))
+    print(solution(G, P, Dock))
