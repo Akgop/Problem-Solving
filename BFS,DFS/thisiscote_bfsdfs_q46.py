@@ -1,7 +1,6 @@
 import sys
 from collections import deque
 import heapq
-from pprint import pprint
 
 dx = [-1, 0, 1, 0]
 dy = [0, -1, 0, 1]
