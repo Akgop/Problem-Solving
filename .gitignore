@@ -5,4 +5,5 @@
 *.zip
 *.pptx
 *.log
-/_CannotUpload
+_CannotUpload
+.DS_Store
