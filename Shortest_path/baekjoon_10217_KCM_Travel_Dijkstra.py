@@ -7,24 +7,31 @@ def solution(n, start, cost_limit):
     dp = [[INF] * (cost_limit+1) for _ in range(n+1)]
     dp[1][0] = 0    # 1에서 1로 가는 비용은 0
     heap = []
-    for to_cost, to_dist, to_node in routes[start]:
-        dp[to_node][to_cost] = to_dist
-        heapq.heappush(heap, (to_cost, to_dist, to_node))
+    heapq.heappush(heap, (0, 0, start))
+    answer = INF
     while heap:
-        cur_cost, cur_dist, cur_node = heapq.heappop(heap)
-        if dp[cur_node][cur_cost] < cur_dist:
+        cur_dist, cur_cost, cur_node = heapq.heappop(heap)
+        if cur_dist > dp[cur_node][cur_cost]:
             continue
+        # 비용에 구애받지 않고 최단 거리로(heap 에 의해 보장) n에 도달한 경우 stop
+        if cur_node == n:
+            answer = cur_dist
+            break
         for to_cost, to_dist, to_node in routes[cur_node]:
             new_cost = cur_cost + to_cost
             new_dist = cur_dist + to_dist
+            # 만약 new cost 가 cost limit 을 넘기면 pass
             if new_cost > cost_limit:
                 continue
-            if new_dist < dp[to_node][new_cost]:
-                dp[to_node][new_cost] = new_dist
-                heapq.heappush(heap, (new_cost, new_dist, to_node))
-    answer = INF
-    for c in dp[n]:
-        answer = min(c, answer)
+            # heap 에 굳이 넣을 이유가 없다면 pass
+            if dp[to_node][new_cost] <= new_dist:
+                continue
+            # dp table 값을 업데이트 해야함
+            for i in range(new_cost, cost_limit + 1):
+                if dp[to_node][i] < new_dist:
+                    break
+                dp[to_node][i] = new_dist
+            heapq.heappush(heap, (new_dist, new_cost, to_node))
     return answer if answer != INF else "Poor KCM"
 
 
