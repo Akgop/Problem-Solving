@@ -9,12 +9,12 @@ def solution(relation):
 
     for c in range(1, col + 1):
         for comb in combinations(list(index), c):
-            hist = set()
+            tmp = set()
             for rel in relation:
                 row = tuple(rel[c] for c in comb)
-                if row in hist:
+                if row in tmp:
                     break
-                hist.add(row)
+                tmp.add(row)
             else:
                 for key in result:
                     if set(key).issubset(set(comb)):
