@@ -1,36 +1,28 @@
 from itertools import combinations
 
 
-def check(relation, li, row):
-    dup = set()
-    for r in range(row):
-        tmp = []
-        for i in li:
-            tmp.append(relation[r][i])
-        tup_tmp = tuple(tmp)
-        if tup_tmp in dup:
-            return False
-        dup.add(tup_tmp)
-    return True
-
-
 def solution(relation):
-    answer = 0
+    col, row = len(relation[0]), len(relation)
 
-    col = len(relation[0])
-    row = len(relation)
+    index = set(i for i in range(col))
+    result = []
 
-    visited = [i for i in range(col)]
-    for i in range(1, col + 1):
-        combination = combinations(visited, i)
-        for li in combination:
-            if -1 in li:
-                continue
-            if check(relation, li, row):
-                for v in li:
-                    visited[v] = -1
-                answer += 1
-    return answer
+    for c in range(1, col + 1):
+        for comb in combinations(list(index), c):
+            hist = set()
+            for rel in relation:
+                row = tuple(rel[c] for c in comb)
+                if row in hist:
+                    break
+                hist.add(row)
+            else:
+                for key in result:
+                    if set(key).issubset(set(comb)):
+                        break
+                else:
+                    result.append(comb)
+
+    return len(result)
 
 
 print(solution([["100","ryan","music","2"],
