@@ -39,5 +39,6 @@ def solution(N, number):
     return bfs(N, number)
 
 
-print(solution(5, 12))
-print(solution(2, 11))
+# print(solution(5, 12))
+print(solution(5, 24))
+print(solution(5, 26))
